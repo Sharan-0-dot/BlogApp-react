@@ -1,12 +1,59 @@
-# React + Vite
+# 📝 BlogApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack journal/blogging application that allows users to create, view, and manage personal journal entries in a secure and responsive environment.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Demo
 
-## Expanding the ESLint configuration
+> [Add link here if deployed frontend/backend]
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Tech Stack
+
+### 🖥️ Frontend
+- **React.js** – For building a responsive SPA
+- **React Router DOM** – For page navigation
+- **Tailwind CSS / DaisyUI** – For modern UI styling
+- **Axios** – For API communication
+
+### 🖧 Backend
+- **Spring Boot** – For building REST APIs
+- **Spring Security** – For authentication and authorization
+- **JWT (JSON Web Token)** – For secure user sessions
+- **MongoDB** – As a NoSQL database
+- **Cloudinary** – For image upload and cloud storage
+
+---
+
+## 🧩 Features
+
+- 🔐 **Authentication**
+  - User registration and login
+  - JWT-based authentication for secure routes
+
+- 📝 **Journal Management**
+  - Create, edit, delete personal posts
+  - Rich text & image support
+
+- 🌐 **Responsive UI**
+  - Works seamlessly across devices (mobile, tablet, desktop)
+
+- ☁️ **Cloud Storage**
+  - Image uploads are handled securely via Cloudinary
+
+---
+
+## 📂 Folder Structure
+
+│
+├── backend/ # Spring Boot backend
+│ ├── src/
+│ └── pom.xml
+│
+├── frontend/ # React frontend
+│ ├── src/
+│ └── package.json
+│
+└── README.md
