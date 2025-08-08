@@ -43,7 +43,7 @@ function Blogs() {
                         </div>
             })}
         </div>
-        <div className="h-16"></div>
+        <div className="h-15"></div>
         </>
     );
 }
