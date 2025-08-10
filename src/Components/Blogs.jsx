@@ -10,7 +10,10 @@ function Blogs() {
         const fetchBlogs = async () => {
             try {
                 const response = await Api.get('/public/blogs');
-                setBlogs(response.data);
+                const sortedBlogs = [...response.data].sort((a, b) => {
+                    return new Date(b.created) - new Date(a.created);
+                });
+                setBlogs(sortedBlogs);
                 setloading(false);
             } catch (err) {
                 if(err.response) {

@@ -8,7 +8,7 @@ function Portfolio() {
     const[loading, setloading] = useState(true);
     const[user, setUser] = useState([]);
     const[img, setImage] = useState('');
-    const[imgUpdated, setImgUpdated] = useState(false);
+    const[upload, setUpload] = useState([]);
 
     useEffect(() => {
         const fetch = async () => {
@@ -17,7 +17,10 @@ function Portfolio() {
                 setUser(response1.data);
                 setImage(response1.data.imgURL == null ? '' : response1.data.imgURL);
                 const response = await Api.get('/user/blogs');
-                setBlogs(response.data);
+                const sortedBlogs = [...response.data].sort((a, b) => {
+                    return new Date(b.created) - new Date(a.created);
+                });
+                setBlogs(sortedBlogs);
                 setloading(false);
             } catch (err) {
                 console.log(`${err.message}`);
@@ -25,7 +28,7 @@ function Portfolio() {
         }
 
         fetch();
-    }, [imgUpdated]);
+    }, []);
 
     const uploadImage = async (file) => {
         const data = new FormData();
@@ -38,7 +41,9 @@ function Portfolio() {
                 method : "POST",
                 body : data
             });
-            const cloudData = await response.json(); 
+            const cloudData = await response.json();
+            setImage(cloudData.url);
+            console.log(cloudData.url);
             return cloudData.url;
         } catch(err) {
             console.log(`${err.message}`);
@@ -47,18 +52,25 @@ function Portfolio() {
 
     const updateUser = async (url) => {
         try {
-            const response = await Api.put('/user/', {imgURL : url})
-            setImgUpdated(prev => !prev);
+            await Api.put('/user/', {imgURL : url});
         } catch (err) {
             console.log(`${err.message}`);
         }
     }
 
-    const handleOnChange = async (e) => {
+    const handleOnChange = (e) => {
         const file = e.target.files[0];
         if(!file) return;
-        const imgUrl = await uploadImage(file);
-        updateUser(imgUrl);
+        setUpload(file);
+    }
+
+    const handleUploadClick = async () => {
+        if(!upload) return;
+        setloading(true);
+        const imgURL = await uploadImage(upload);
+        await updateUser(imgURL);
+        setloading(false);
+        setUpload(null);
     }
 
     return (
@@ -79,15 +91,17 @@ function Portfolio() {
               </div>
             </div>
         </div>
-        {img == '' && <div className="flex flex-col items-center justify-center">
+        {loading && <div className="flex justify-center align-middle h-60"><span className="loading loading-infinity loading-lg"></span></div>}
+        {img == '' && !loading && <div className="flex flex-col items-center justify-center">
             <h1 className="my-5 font-mono text-xl italic">upload profile picture</h1>
             <input type="file" className="file-input file-input-ghost" onChange={handleOnChange}/>
+            <button className="btn btn-neutral my-10" onClick={handleUploadClick}>Upload</button>
         </div>}
         <div className="flex items-center justify-center">
             <h1 className="my-5 font-mono text-2xl italic">Your Blogs</h1>
         </div>
         {loading && <div className="flex justify-center align-middle h-60"><span className="loading loading-infinity loading-xl"></span></div>}
-        <div className="mt-2 md:mt-4 p-3 md:p-8">
+        {!loading && <div className="mt-2 md:mt-4 p-3 md:p-8">
             {blogs.map((blog, index) => {
                 return <div key={index} className="bg-base-100 border border-base-300 p-3 rounded-md shadow-lg mb-2">
                             <div className="font-semibold">{blog.authorName}</div>
@@ -100,7 +114,7 @@ function Portfolio() {
                             </div>
                         </div>
             })}
-        </div>
+        </div>}
         </>
     );
 }
