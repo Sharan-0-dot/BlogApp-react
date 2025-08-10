@@ -50,9 +50,7 @@ function PostBlog() {
     return(
         <>
         <div className="flex flex-col justify-center items-center p-8 md:p-16">
-            <h1 className="my-10 md:mb-10 font-mono text-2xl italic">Whats on your mind today</h1>
-            <textarea className="textarea textarea-md w-full" placeholder="Your Blog" onChange={handleOnChange} value={content}></textarea>
-            <h1 className="my-10 md:mb-7 font-mono text-2xl italic">Preview</h1>
+            <h1 className="my-8 md:mb-7 font-mono text-2xl italic">Preview</h1>
             <div className="bg-base-100 border border-base-300 p-3 rounded-md shadow-lg mb-2">
                     <div className="font-semibold">{username}</div>
                     <div className="text-sm mb-2">{content}</div>
@@ -62,6 +60,8 @@ function PostBlog() {
                       <div>❤️ 0 Likes</div>
                     </div>
             </div>
+            <h1 className="my-10 md:mb-10 font-mono text-2xl italic">Whats on your mind today</h1>
+            <textarea className="textarea textarea-md w-full" placeholder="Your Blog" onChange={handleOnChange} value={content}></textarea>
             <button className="btn btn-neutral my-10" onClick={postBlog}>Post</button>
             {loader && <div className="flex justify-center align-middle h-60"><span className="loading loading-infinity loading-xl"></span></div>}
             {alert && <div role="alert" className="alert alert-success">

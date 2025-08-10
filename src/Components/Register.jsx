@@ -45,11 +45,12 @@ function Register() {
     }
     if(details.password.length < 8) {
       alert("Passwords must be atleast 8 characters long");
+      return;
     }
     const register = async () => {
       try {
         setLoader(true);
-        const response = await Api.post("/public/register", {
+        await Api.post("/public/register", {
           username: details.username,
           password: details.password,
         });
@@ -89,9 +90,17 @@ function Register() {
           className="w-48 md:w-64 h-auto mb-8 md:mb-12"
         />
         {loader && (
-          <div className="flex justify-center align-middle h-60">
-            <span className="loading loading-infinity loading-xl"></span>
-          </div>
+          <>
+            <div className="flex justify-center align-middle h-60">
+              <span className="loading loading-infinity loading-xl"></span>
+            </div>
+            <div role="alert" className="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="h-6 w-6 shrink-0 stroke-current">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>As The backend server is deployed on render it may take few seconds to process the first request please wait</span>
+            </div>
+          </>
         )}
         {alert == 'success' && (
           <div role="alert" className={`alert alert-success`}>
