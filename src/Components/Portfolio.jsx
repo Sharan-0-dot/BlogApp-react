@@ -43,7 +43,6 @@ function Portfolio() {
             });
             const cloudData = await response.json();
             setImage(cloudData.url);
-            console.log(cloudData.url);
             return cloudData.url;
         } catch(err) {
             console.log(`${err.message}`);
@@ -91,11 +90,10 @@ function Portfolio() {
               </div>
             </div>
         </div>
-        {loading && <div className="flex justify-center align-middle h-60"><span className="loading loading-infinity loading-lg"></span></div>}
         {img == '' && !loading && <div className="flex flex-col items-center justify-center">
             <h1 className="my-5 font-mono text-xl italic">upload profile picture</h1>
             <input type="file" className="file-input file-input-ghost" onChange={handleOnChange}/>
-            <button className="btn btn-neutral my-10" onClick={handleUploadClick}>Upload</button>
+            <button className="btn btn-neutral my-5" onClick={handleUploadClick}>Upload</button>
         </div>}
         <div className="flex items-center justify-center">
             <h1 className="my-5 font-mono text-2xl italic">Your Blogs</h1>

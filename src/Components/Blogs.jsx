@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Api from '/src/Api/Private'
+import Api from '/src/Api/Public'
 
 function Blogs() {
 

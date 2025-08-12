@@ -30,7 +30,7 @@ function Settings() {
     return (
         <>
         <div className="flex flex-col justify-center items-center mt-10 p-4">
-            <button className="btn btn-wide mb-10 font-mono text-xl italic" onClick={showAlert}>Edit profile</button>
+            <button className="btn btn-wide mb-10 font-mono text-xl italic" onClick={() => {navigate('/profile')}}>Edit profile</button>
             <button className="btn btn-wide mb-10 font-mono text-xl italic" onClick={showAlert}>Edit Blogs</button>
             <button className="btn btn-wide mb-10 font-mono text-xl italic" onClick={() => {localStorage.clear(); navigate('/')}}>Logout</button>
             <button className="btn btn-wide mb-10 font-mono text-xl italic text-red-700" onClick={deactivate}>deActivate Account</button>
